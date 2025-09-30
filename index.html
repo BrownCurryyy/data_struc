@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DS Visualizer — Stack</title>
+
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="quiz.js" defer></script>
+</head>
+<body>
+  <!-- PRIMARY NAV -->
+  <nav class="navbar">
+    <div class="logo">Praneetha & Sonali</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECONDARY NAV -->
+  <div class="secondary-nav">
+    <button class="ds-tab active" data-ds="stack">Stack</button>
+    <button class="ds-tab" onclick="window.location.href='queue.html'">Queue</button>
+    <button class="ds-tab" disabled>Tree</button>
+    <button class="ds-tab" disabled>Graph</button>
+  </div>
+
+  <!-- MAIN: VISUALIZER (left) + EXPLANATION (right) -->
+  <div class="main">
+    <!-- LEFT: VISUALIZER + LOGS -->
+    <div class="visualizer">
+      <div class="visualizer-header">
+        <h2 class="title">Stack Simulator</h2>
+        <div class="controls">
+          <button class="btn" id="pushBtn">Push</button>
+          <button class="btn" id="popBtn">Pop</button>
+          <button class="btn ghost" id="autoBtn">Auto Sim</button>
+          <button class="btn outline" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="sim-area">
+        <!-- Simulation rectangle -->
+        <div class="sim-canvas" id="simCanvas">
+          <div id="stackContainer" class="stack-container"></div>
+        </div>
+
+        <!-- Logs panel -->
+        <aside class="logs-panel">
+          <div class="logs-header">
+            <strong>Action Log</strong>
+            <button class="icon-btn" id="clearLogs" title="Clear logs">✕</button>
+          </div>
+          <div id="logList" class="log-list"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- RIGHT: EXPLANATION + SUBNAV (Explanation / Pseudocode / Quiz) -->
+    <aside class="explanation">
+      <div class="explain-nav">
+        <button class="explain-tab active" data-section="explain">Explanation</button>
+        <button class="explain-tab" data-section="pseudo">Pseudocode</button>
+        <button class="explain-tab" data-section="quiz">Quiz</button>
+      </div>
+
+      <!-- BIG DESCRIPTION -->
+      <section id="explain" class="explain-section active">
+        <h3>What is a Stack?</h3>
+        <p class="big">
+          A <strong>stack</strong> is a linear data structure that follows the <em>Last In — First Out (LIFO)</em> principle.
+          Items are added and removed only from the top. Stacks are used for function call management, undo history, expression parsing,
+          and more. Visual learners: think of a stack of trays — you put trays on top and take them from the top.
+        </p>
+
+        <div class="explain-points">
+          <div><strong>Push:</strong> add an item on top (constant time).</div>
+          <div><strong>Pop:</strong> remove the top item (constant time).</div>
+          <div><strong>Peek:</strong> view top without removing.</div>
+          <div><strong>Applications:</strong> recursion, backtracking, parsing, undo stacks.</div>
+        </div>
+      </section>
+
+      <!-- PSEUDOCODE -->
+      <section id="pseudo" class="explain-section">
+        <h3>Pseudocode</h3>
+        <pre class="code-block">
+/* array-based stack */
+initialize stack as array
+top ← -1
+
+function PUSH(x):
+  top ← top + 1
+  stack[top] ← x
+
+function POP():
+  if top == -1:
+    error "underflow"
+  value ← stack[top]
+  top ← top - 1
+  return value
+
+function PEEK():
+  if top != -1 return stack[top]
+        </pre>
+      </section>
+
+      <!-- QUIZ -->
+<section id="quiz" class="explain-section">
+  <h3>Quick Quiz — Stack</h3>
+  <p class="quiz-intro">Answer the 4 MCQs. Timer runs per quiz. Smooth animations, instant feedback.</p>
+
+  <div id="QuizArea" class="quiz-area"></div>
+
+  <div class="quiz-footer">
+    <div class="timer" id="QuizTimer">Time: 00</div>
+    <button class="btn" id="StartQuiz">Start Quiz</button>
+  </div>
+
+  <div id="QuizResult" class="quiz-result" hidden>
+    <canvas id="ResultChart" width="180" height="180"></canvas>
+    <div id="ResultText" class="result-text"></div>
+    <div id="ExplainWrong" class="explain-wrong"></div>
+    <button class="btn outline" id="RetryQuiz">Retry</button>
+  </div>
+</section>
+
+    </aside>
+  </div>
+</body>
+</html>
