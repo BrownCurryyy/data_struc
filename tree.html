@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DS Visualizer — Tree</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="tree.js" defer></script>
+  <script src="quiz.js" defer></script>
+</head>
+<body>
+  <!-- PRIMARY NAV -->
+  <nav class="navbar">
+    <div class="logo">Praneetha & Sonali</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECONDARY NAV -->
+  <div class="secondary-nav">
+    <button class="ds-tab" onclick="window.location.href='index.html'">Stack</button>
+    <button class="ds-tab" onclick="window.location.href='queue.html'">Queue</button>
+    <button class="ds-tab active" data-ds="tree">Tree</button>
+    <button class="ds-tab" disabled>Graph</button>
+  </div>
+<defs>
+  <linearGradient id="nodeGrad" x1="0" x2="1">
+    <stop offset="0%" stop-color="var(--g4)" />
+    <stop offset="100%" stop-color="var(--g5)" />
+  </linearGradient>
+</defs>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- LEFT: TREE VISUALIZER -->
+    <div class="visualizer">
+      <div class="visualizer-header">
+        <h2 class="title">Binary Tree Simulator</h2>
+        <div class="controls">
+          <button class="btn" id="insertNodeBtn">Insert</button>
+          <button class="btn" id="deleteNodeBtn">Delete</button>
+          <button class="btn ghost" id="autoTreeBtn">Auto Sim</button>
+          <button class="btn outline" id="resetTreeBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="sim-area">
+        <div class="sim-canvas tree-canvas" id="treeCanvas">
+          <!-- Tree will be drawn here -->
+          <svg id="treeSVG" width="100%" height="100%"></svg>
+        </div>
+
+        <!-- Logs -->
+        <aside class="logs-panel">
+          <div class="logs-header">
+            <strong>Action Log</strong>
+            <button class="icon-btn" id="clearTreeLogs" title="Clear logs">✕</button>
+          </div>
+          <div id="treeLogList" class="log-list"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- RIGHT: EXPLANATION -->
+    <aside class="explanation">
+      <div class="explain-nav">
+        <button class="explain-tab active" data-section="treeExplain">Explanation</button>
+        <button class="explain-tab" data-section="treePseudo">Pseudocode</button>
+        <button class="explain-tab" data-section="treeQuizSection">Quick Quiz</button>
+      </div>
+
+      <!-- Explanation -->
+      <section id="treeExplain" class="explain-section active">
+        <h3>What is a Binary Tree?</h3>
+        <p class="big">
+          A <strong>binary tree</strong> is a hierarchical data structure where each node has up to two children: 
+          <em>left</em> and <em>right</em>. It’s used in searching, sorting, and hierarchical data representation.
+        </p>
+        <div class="explain-points">
+          <div><strong>Insert:</strong> Add a node in the tree</div>
+          <div><strong>Delete:</strong> Remove a node while maintaining structure</div>
+          <div><strong>Traversals:</strong> Inorder, Preorder, Postorder, BFS</div>
+          <div><strong>Applications:</strong> Expression trees, file systems, BSTs</div>
+        </div>
+      </section>
+
+      <!-- Pseudocode -->
+      <section id="treePseudo" class="explain-section">
+        <h3>Pseudocode</h3>
+<pre class="code-block">
+class Node:
+  data, left, right
+
+function INSERT(root, value):
+  if root is null:
+    return new Node(value)
+  if value < root.data:
+    root.left = INSERT(root.left, value)
+  else:
+    root.right = INSERT(root.right, value)
+  return root
+
+function SEARCH(root, value):
+  if root is null or root.data == value: return root
+  if value < root.data: return SEARCH(root.left, value)
+  else return SEARCH(root.right, value)
+</pre>
+      </section>
+
+      <!-- Quiz -->
+      <section id="treeQuizSection" class="explain-section">
+        <h3>Quick Quiz — Tree</h3>
+        <div id="treeQuizArea" class="quiz-area"></div>
+        <div class="quiz-footer">
+          <div class="timer" id="treeQuizTimer">Time: 00</div>
+          <button class="btn" id="treeStartQuiz">Start Quiz</button>
+        </div>
+        <div id="treeQuizResult" class="quiz-result" hidden>
+          <canvas id="treeResultChart" width="180" height="180"></canvas>
+          <div id="treeResultText" class="result-text"></div>
+          <div id="treeExplainWrong" class="explain-wrong"></div>
+          <button class="btn outline" id="treeRetryQuiz">Retry</button>
+        </div>
+      </section>
+    </aside>
+  </div>
+</body>
+</html>
