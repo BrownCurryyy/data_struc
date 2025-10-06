@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DS Visualizer — Graph</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="graph.js" defer></script>
+  <script src="quiz.js" defer></script>
+</head>
+<body>
+  <!-- PRIMARY NAV -->
+  <nav class="navbar">
+    <div class="logo">Praneetha & Sonali</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECONDARY NAV -->
+  <div class="secondary-nav">
+    <button class="ds-tab" onclick="window.location.href='index.html'">Stack</button>
+    <button class="ds-tab" onclick="window.location.href='queue.html'">Queue</button>
+    <button class="ds-tab" onclick="window.location.href='tree.html'">Tree</button>
+    <button class="ds-tab active" data-ds="graph">Graph</button>
+  </div>
+
+  <div class="main">
+    <!-- LEFT: GRAPH VISUALIZER -->
+    <div class="visualizer">
+      <div class="visualizer-header">
+        <h2 class="title">Graph Explorer</h2>
+        <div class="controls">
+          <button class="btn" id="addNodeBtn">Add Node</button>
+          <button class="btn" id="addEdgeBtn">Add Edge</button>
+          <button class="btn" id="bfsBtn">BFS</button>
+          <button class="btn" id="dfsBtn">DFS</button>
+          <button class="btn outline" id="resetGraphBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="sim-area">
+        <div class="sim-canvas graph-canvas" id="graphCanvas">
+          <svg id="graphSVG" width="100%" height="100%"></svg>
+        </div>
+
+        <!-- Logs -->
+        <aside class="logs-panel">
+          <div class="logs-header">
+            <strong>Action Log</strong>
+            <button class="icon-btn" id="clearGraphLogs" title="Clear logs">✕</button>
+          </div>
+          <div id="graphLogList" class="log-list"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- RIGHT: EXPLANATION -->
+    <aside class="explanation">
+      <div class="explain-nav">
+        <button class="explain-tab active" data-section="graphExplain">Explanation</button>
+        <button class="explain-tab" data-section="graphPseudo">Pseudocode</button>
+        <button class="explain-tab" data-section="graphQuizSection">Quick Quiz</button>
+      </div>
+
+      <!-- Explanation -->
+      <section id="graphExplain" class="explain-section active">
+        <h3>What is a Graph?</h3>
+        <p class="big">
+          A <strong>graph</strong> is a collection of <em>nodes (vertices)</em> connected by <em>edges</em>. 
+          Graphs can be directed or undirected, weighted or unweighted.
+        </p>
+        <div class="explain-points">
+          <div><strong>BFS:</strong> Level-wise traversal using a queue</div>
+          <div><strong>DFS:</strong> Depth-first traversal using recursion or stack</div>
+          <div><strong>Applications:</strong> Social networks, maps, web crawlers</div>
+        </div>
+      </section>
+
+      <!-- Pseudocode -->
+      <section id="graphPseudo" class="explain-section">
+        <h3>Pseudocode</h3>
+<pre class="code-block">
+function BFS(graph, start):
+  queue = [start]
+  visited = {start}
+  while queue not empty:
+    node = queue.pop(0)
+    visit(node)
+    for neighbor in graph[node]:
+      if neighbor not in visited:
+        visited.add(neighbor)
+        queue.push(neighbor)
+</pre>
+      </section>
+
+      <!-- Quiz -->
+      <section id="graphQuizSection" class="explain-section">
+        <h3>Quick Quiz — Graph</h3>
+        <div id="graphQuizArea" class="quiz-area"></div>
+        <div class="quiz-footer">
+          <div class="timer" id="graphQuizTimer">Time: 00</div>
+          <button class="btn" id="graphStartQuiz">Start Quiz</button>
+        </div>
+        <div id="graphQuizResult" class="quiz-result" hidden>
+          <canvas id="graphResultChart" width="180" height="180"></canvas>
+          <div id="graphResultText" class="result-text"></div>
+          <div id="graphExplainWrong" class="explain-wrong"></div>
+          <button class="btn outline" id="graphRetryQuiz">Retry</button>
+        </div>
+      </section>
+    </aside>
+  </div>
+</body>
+</html>

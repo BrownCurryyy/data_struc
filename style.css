@@ -378,3 +378,26 @@ body {
   justify-content: center;
   padding: 14px;
 }
+
+
+.graph-canvas {
+  background: radial-gradient(circle at center, #161616, #0c0c0c);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(100, 255, 218, 0.2);
+}
+
+.graph-node {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.graph-node:hover {
+  filter: drop-shadow(0 0 8px var(--g4));
+}
+
+.graph-edge {
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
